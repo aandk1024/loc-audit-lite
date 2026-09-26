@@ -1,0 +1,86 @@
+[gd_scene load_steps=2 format=3 uid="uid://blocaudit0dock"]
+
+[ext_resource type="Script" path="res://addons/loc_audit/ui/loc_dock.gd" id="1_dock"]
+
+[node name="Loc Audit" type="VBoxContainer"]
+custom_minimum_size = Vector2(240, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+script = ExtResource("1_dock")
+
+[node name="CsvRow" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CsvLabel" type="Label" parent="CsvRow"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "CSV"
+
+[node name="CsvPath" type="LineEdit" parent="CsvRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "res://…/translations.csv"
+
+[node name="PoRow" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PoLabel" type="Label" parent="PoRow"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "PO"
+
+[node name="PoPath" type="LineEdit" parent="PoRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "res://…/ja.po"
+
+[node name="LocaleRow" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="LocaleLabel" type="Label" parent="LocaleRow"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "Locales"
+
+[node name="Locales" type="LineEdit" parent="LocaleRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "en,ja,de"
+
+[node name="Sep" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="CsvToPo" type="Button" parent="."]
+layout_mode = 2
+tooltip_text = "Write the chosen locale column out as a .po file for translators."
+text = "CSV → PO"
+
+[node name="PoToCsv" type="Button" parent="."]
+layout_mode = 2
+tooltip_text = "Merge a translated .po back into the CSV, keeping the other columns."
+text = "PO → CSV"
+
+[node name="Report" type="Button" parent="."]
+layout_mode = 2
+tooltip_text = "Untranslated, unused, undefined and hardcoded strings."
+text = "Missing / unused keys"
+
+[node name="CheckOverflow" type="Button" parent="."]
+layout_mode = 2
+tooltip_text = "Lay every scene out for real in each locale and measure what does not fit."
+text = "Check overflow"
+
+[node name="Sep2" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="Log" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true
+selection_enabled = true

@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://blocaudit0demo"]
+
+; 買い手が最初に開く画面。ドックの4つのボタンが全部意味のある結果を返すように、
+; 壊れ方を1つずつ仕込んである。訳は demo/localization/demo_ui.csv。
+;   StartButton    de の訳が長くて枠が広がる
+;   MenuRow        コンテナの中で広がり、行そのものが伸びる
+;   StatusBar      clip_text が付いているので、広がる代わりに文字が切れる
+;   Footer         ja の訳が空（未翻訳として挙がる）
+
+[ext_resource type="Script" path="res://demo/main.gd" id="1_main"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+auto_translate_mode = 1
+script = ExtResource("1_main")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 180.0
+offset_bottom = 48.0
+text = "MENU_TITLE"
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 120.0
+offset_bottom = 92.0
+text = "MENU_START"
+
+[node name="MenuRow" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 100.0
+offset_right = 220.0
+offset_bottom = 132.0
+
+[node name="SettingsButton" type="Button" parent="MenuRow"]
+layout_mode = 2
+text = "MENU_SETTINGS"
+
+[node name="QuitButton" type="Button" parent="MenuRow"]
+layout_mode = 2
+text = "MENU_QUIT"
+
+[node name="StatusBar" type="Button" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 140.0
+offset_right = 160.0
+offset_bottom = 172.0
+text = "MSG_WELCOME"
+clip_text = true
+
+[node name="NameField" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 180.0
+offset_right = 220.0
+offset_bottom = 212.0
+placeholder_text = "FIELD_NAME_HINT"
+
+[node name="Footer" type="Label" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 300.0
+offset_right = 300.0
+offset_bottom = 328.0
+text = "FOOTER_NOTE"

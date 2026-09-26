@@ -1,0 +1,11 @@
+keys,en,de,ja
+MENU_TITLE,Main Menu,Hauptmenue,メインメニュー
+MENU_START,Start,Spiel beginnen und fortsetzen,はじめる
+MENU_SETTINGS,Settings,Einstellungen und Voreinstellungen,設定
+MENU_QUIT,Quit,Beenden,終了
+FIELD_NAME_HINT,Your name,Dein vollstaendiger Name,名前
+FOOTER_NOTE,All rights reserved,Alle Rechte vorbehalten,
+MSG_WELCOME,Welcome back!,Willkommen zurueck bei dem Spiel!,おかえりなさい
+ITEM_COUNT,%d item,%d Gegenstand,%d個
+ITEM_COUNT_PLURAL,%d items,%d Gegenstaende,%d個
+LEGACY_HINT,Unused since 1.2,Seit 1.2 unbenutzt,1.2から未使用

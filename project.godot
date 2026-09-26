@@ -1,0 +1,28 @@
+; Loc Audit — Godot 4 localization audit addon
+; Engine configuration file.
+
+config_version=5
+
+[application]
+
+config/name="Loc Audit"
+; 買い手が最初に押すのはこの画面。▶ を押したらデモが動くようにしておく。
+run/main_scene="res://demo/main.tscn"
+config/features=PackedStringArray("4.4", "Forward Plus")
+
+[display]
+
+window/size/viewport_width=1152
+window/size/viewport_height=648
+
+[editor_plugins]
+
+; 有効にした状態で保存してある。エディタを開いた時点で plugin.gd の
+; _enter_tree が走るので、「有効化した瞬間に落ちる」なら起動ログに出る。
+enabled=PackedStringArray("res://addons/loc_audit/plugin.cfg")
+
+[internationalization]
+
+; デモの翻訳。Godot が demo_ui.csv をロケールごとの .translation へ取り込む。
+; エディタもここを読むので、ドックのはみ出し検査は訳が入った状態で測れる。
+locale/translations=PackedStringArray("res://demo/localization/demo_ui.en.translation", "res://demo/localization/demo_ui.de.translation", "res://demo/localization/demo_ui.ja.translation")
