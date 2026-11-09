@@ -84,3 +84,4 @@ size_flags_vertical = 3
 bbcode_enabled = true
 scroll_following = true
 selection_enabled = true
+meta_underlined = true

@@ -36,6 +36,7 @@ func _ready() -> void:
     _log.clear()
     _info("Paths are res:// paths. Locales may be comma separated (en,ja,de).")
     _prefill()
+    _lite_connect()
     _lite_note()
     $CsvToPo.queue_free()
     $PoToCsv.queue_free()
@@ -179,6 +180,7 @@ func _on_report() -> void:
 
     if r.total() == 0:
         _ok("Nothing to fix for %s." % locale)
+    _lite_note()
 
 
 # --- overflow ----------------------------------------------------------------
@@ -306,6 +308,45 @@ func _ok(text: String) -> void:
 func _err(text: String) -> void:
     _line(C_ERR, _esc(text))
 
-## Lite: say once, in the dock itself, what the full version adds and where it is.
+var _lite_press := Vector2.ZERO
+var _lite_dragged := false
+
+
+func _lite_connect() -> void:
+    if is_instance_valid(_log):
+        if not _log.meta_clicked.is_connected(_on_lite_meta):
+            _log.meta_clicked.connect(_on_lite_meta)
+        if not _log.gui_input.is_connected(_on_lite_gui):
+            _log.gui_input.connect(_on_lite_gui)
+
+
+# Godot 4.6+ still sends meta_clicked after a drag that began on the link.
+func _on_lite_gui(event: InputEvent) -> void:
+    if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+        if event.pressed:
+            _lite_press = event.position
+            _lite_dragged = false
+        elif event.position.distance_to(_lite_press) > 4.0:
+            _lite_dragged = true
+
+
 func _lite_note() -> void:
-    _info("Loc Audit Lite. The full version adds: Check overflow; CSV to PO and PO to CSV for handing work to translators and merging it back. https://theidlehands.itch.io/loc-audit")
+    if is_instance_valid(_log):
+        var lite_shown: String = _log.get_parsed_text()
+        if lite_shown.count("Loc Audit Lite. Paid full version adds: Check overflow; CSV to PO and PO to CSV. https://theidlehands.itch.io/loc-audit") >= 4:
+            _log.remove_paragraph(_log.get_character_paragraph(lite_shown.find("Loc Audit Lite. Paid full version adds: Check overflow; CSV to PO and PO to CSV. https://theidlehands.itch.io/loc-audit") + 10))
+        _log.append_text("Loc Audit Lite. Paid full version adds: Check overflow; CSV to PO and PO to CSV. [url=https://theidlehands.itch.io/loc-audit]https://theidlehands.itch.io/loc-audit[/url]\n")
+
+
+func _on_lite_meta(meta: Variant) -> void:
+    if not (meta is String):
+        return
+    if meta != "https://theidlehands.itch.io/loc-audit":
+        return
+    if _lite_dragged:
+        return
+    if is_instance_valid(_log) and not _log.get_selected_text().is_empty():
+        return
+    var error := OS.shell_open("https://theidlehands.itch.io/loc-audit")
+    if error != OK and is_instance_valid(_log):
+        _info("Could not open the browser. Copy this URL: https://theidlehands.itch.io/loc-audit")
